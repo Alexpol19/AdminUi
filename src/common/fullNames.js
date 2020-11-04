@@ -1,0 +1,23 @@
+export const fullNames = [
+    'Rhea McLaughlin',
+    'John Connor',
+    'Aaron Brown',
+    'Tamara Buruian',
+    'Alexei Poliuhovici',
+    'Hello Kitty',
+    'Ann-Louise Lundgren',
+    'Luciana Tirado',
+    'Logan McKenzie',
+    'Nils McKenzie',
+    'Sherlock Holmes',
+    'Muzio Gatti',
+    'Gaston Schneider',
+    'Noah Beier',
+    'Jayme Bruen',
+    'Adam Clarke',
+    'Neil Watson',
+    'Gavin Stevens',
+    'Noah Wilson',
+    'Dylan Walsh',
+    'Arthur Morgan'
+]
