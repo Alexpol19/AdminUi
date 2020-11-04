@@ -11,8 +11,7 @@
         3.(Chart page) Selecting a period from dateRangePicker should re-populate 
         the “card”, “chart” and “list” parts
         4.(Chart page) Data should refresh automatically every 10s
-        5.(Suport page) UI should allow searching by 3 input fields. 
-        After a “search” button is pressed, list items should be re-populated with API response
+        5.(Suport page) After a “search” button is pressed, list items should be re-populated with API response
 
 ## Available Scripts
 
