@@ -1,7 +1,8 @@
 import { Grid, makeStyles, Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import { Line } from 'react-chartjs-2'
-import { months } from '../../../../common/months'
+import * as moment from 'moment';
+// import 'moment/locale/ru';
 
 const getData = pages => {
   const labels = pages.map((page) => page.label)
@@ -48,14 +49,18 @@ const useStyles = makeStyles((theme) => ({
 
 const MyChart = ({pages, range}) => {
   const classes = useStyles();
+  // moment.locale('ru')
   const startDate = new Date(range.startDate)
   const endDate = new Date(range.endDate)
   const data = getData(pages);
+  function formatDate(start, end) {
+    return moment(start).format('D MMM')+' - '+moment(end).format('D MMM')
+  }
   return (<>
     <Paper elevation={3} className={classes.paper}>
         <Grid container item xs={12} justify="space-between" style={{ paddingBottom: 20 }}>
             <Typography className={classes.title} variant="body2" component="p">Numar de utilizatori</Typography>
-            <Typography className={classes.title} variant="body2" component="p">{startDate.getDate() + ' ' + months[startDate.getMonth()]} - {endDate.getDate() + ' ' + months[endDate.getMonth()]}</Typography>
+            <Typography className={classes.title} variant="body2" component="p">{formatDate(startDate, endDate)}</Typography>
         </Grid>
         <div className={classes.chartWrapper}>
             <Line data={data} options={options} height={70} redraw={true} />

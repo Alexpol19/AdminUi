@@ -1,6 +1,5 @@
 import { adminUiAPI } from "../api/api"
 import { getRndInteger } from "../common/randomNumber";
-import { setCurrentPage } from "./aside";
 
 const inintialState = {
     initialized: false,
@@ -31,11 +30,6 @@ const setInitialized = () => {
 // async
 export const initializeApp = () => async (dispatch) => {
     const response = await adminUiAPI.getResponse();
-    var currentPage = localStorage.getItem('current');
-    if(!Number(currentPage)){
-        currentPage = 0;
-    }
-    dispatch(setCurrentPage(currentPage));  
     if(response.data.statusCode === 0){
         setTimeout(function(){
             dispatch(setInitialized())

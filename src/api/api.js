@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { fullNames } from '../common/fullNames';
 import { letters } from '../common/letters';
 import { getRndInteger, getRndTime } from '../common/randomNumber';
+import * as moment from 'moment';
 
 const instance = axios.create({
     baseURL: 'http://localhost:3001/',
@@ -48,13 +49,12 @@ mock.onGet("/search").reply(function (config) {
 mock.onGet("/raport").reply(function (config) {
     const startDate = new Date(config.params.range.startDate)
     const endDate = new Date(config.params.range.endDate)
-    const minDay = startDate.getDate()
-    const maxDay = endDate.getDate()
-    const minMonth = startDate.getMonth()
-    const maxMonth = endDate.getMonth()
-    const minYear = startDate.getFullYear()
-    const maxYear = endDate.getFullYear()
-
+    const minDay = Number(moment(startDate).format('D'))
+    const maxDay = Number(moment(endDate).format('D'))
+    const minMonth = Number(moment(startDate).format('MM'))
+    const maxMonth = Number(moment(endDate).format('MM'))
+    const minYear = Number(moment(startDate).format('YYYY'))
+    const maxYear = Number(moment(endDate).format('YYYY'))
     const installations = getRndInteger(1000, 10000);
     const increasePercent = getRndInteger(0.1, 50);
 

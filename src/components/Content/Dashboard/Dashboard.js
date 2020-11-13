@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import ChartPage from './ChartPage/ChartPage';
 import Report from './Report/Report';
 import { greenTheme } from '../../../common/ThemeVars';
+import PageHead from '../PageHead';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -67,24 +68,27 @@ export default function Dashboard() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <CustomTabs 
-          className={classes.tabs} 
-          value={value} 
-          onChange={handleChange} 
-          aria-label="simple tabs"
-          >
-          <Tab className={classes.tab} label="Chart" {...a11yProps(0)} />
-          <Tab className={classes.tab} label="Report" {...a11yProps(1)} />
-        </CustomTabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <ChartPage/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Report />
-      </TabPanel>
-    </div>
+    <>
+      <PageHead pageName={'Dashboard'} />
+      <div className={classes.root}>
+        <AppBar position="static" className={classes.appBar}>
+          <CustomTabs 
+            className={classes.tabs} 
+            value={value} 
+            onChange={handleChange} 
+            aria-label="simple tabs"
+            >
+            <Tab className={classes.tab} label="Chart" {...a11yProps(0)} />
+            <Tab className={classes.tab} label="Report" {...a11yProps(1)} />
+          </CustomTabs>
+        </AppBar>
+        <TabPanel value={value} index={0}>
+          <ChartPage/>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Report />
+        </TabPanel>
+      </div>
+    </>
   );
 }

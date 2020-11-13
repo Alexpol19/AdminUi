@@ -1,6 +1,6 @@
 import { adminUiAPI } from "../api/api";
-import { formatDate } from "../common/formatDate";
 import { getRndInteger } from "../common/randomNumber";
+import * as moment from 'moment';
 
 const inintialState = {
     items: [],
@@ -39,6 +39,12 @@ const setClients = (clients) => {
     }
 }
 // async
+
+function formatDate(dateStr){
+    const initDate = new Date(dateStr);
+    return moment(initDate).format('L')
+}
+
 export const search = (params) => async (dispatch) => {
     dispatch(setSearchFetching())
     const response = await adminUiAPI.searchClients({...params, dateAccess: formatDate(params.dateAccess)});

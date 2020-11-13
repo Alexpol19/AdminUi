@@ -5,17 +5,15 @@ import Header from './Header/Header';
 import AsideNav from './AsideNav/AsideNav';
 import Content from './Content/Content';
 import { connect } from 'react-redux';
-import {setCurrentPage} from '../redux/aside';
-import { getCurrentPage } from '../redux/selectors/aside-selectors';
 
-const Main = ({nav, currentPage, setCurrentPage}) => {
+const Main = ({nav, setCurrentPage}) => {
     return (
         <>
             <CssBaseline />
             <Container maxWidth={false} disableGutters={true}>
                 <Header />
-                <AsideNav nav={nav} setCurrentPage={setCurrentPage} />
-                <Content currentPage={currentPage} />
+                <AsideNav nav={nav}/>
+                <Content />
             </Container>
         </>
     );
@@ -24,8 +22,7 @@ const Main = ({nav, currentPage, setCurrentPage}) => {
 const mapStateToProps = state => {
     return {
         nav: state.aside,
-        currentPage: getCurrentPage(state.aside)
     }
 }
 
-export default connect(mapStateToProps, {setCurrentPage})(Main);
+export default connect(mapStateToProps, {})(Main);

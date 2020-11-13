@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import SpeedIcon from '@material-ui/icons/Speed';
+import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import { ReactComponent as lifebuoyIcon } from '../../common/lifebuoy.svg';
-import { SvgIcon } from '@material-ui/core';
+import { SvgIcon, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import { greenTheme } from '../../common/ThemeVars';
+import { NavLink, withRouter } from 'react-router-dom';
 
 const aside = greenTheme.AsideNav;
 
@@ -26,26 +24,42 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   listItem: {
-      color: aside.listItem.color,
-      paddingLeft: theme.spacing(4),
-      paddingRight: theme.spacing(4),
+    color: aside.listItem.color,
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    paddingTop: theme.spacing(2),
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
   },
   listItemActive: {
-      color: aside.listItemActive.color
+    color: aside.listItemActive.color
   },
   listItemIcon: {
-    fontSize: '1.7rem'
+    fontSize: '1.7rem',
   },
   listItemText: {
-    color: 'inherit',
-    fontWeight: '600'
+    paddingLeft: theme.spacing(3.5)
   }
 }));
 
-const AsideNav = ({nav, setCurrentPage}) => {
+const AsideNav = (props) => {
     const classes = useStyles();
-    const setActive = (current) => {
-      setCurrentPage(current);
+   
+    const getNavIcon = (pageName) => {
+      switch (pageName) {
+        case 'dashboard':
+          return <SpeedIcon className={classes.listItemIcon}  />
+        case 'suport':
+          return <SvgIcon className={classes.listItemIcon}  component={lifebuoyIcon} viewBox="0 0 600 600"/>
+        default:
+          return <TurnedInIcon className={classes.listItemIcon}  />
+      }
+    }
+    const isActive = (pageName) => {
+      if('/'+pageName === props.location.pathname){
+        return true
+      }
     }
     return (
         <Drawer
@@ -57,17 +71,15 @@ const AsideNav = ({nav, setCurrentPage}) => {
         >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          <List>
-            {nav.pages.map((page) => (
-              <ListItem button key={page.name} className={clsx(classes.listItem, page.id === nav.current ? classes.listItemActive : '')} onClick={() => setActive(page.id)}>
-                <ListItemIcon color="inherit">{page.id % 2 === 0 ? <SpeedIcon className={classes.listItemIcon} style={ page.id === nav.current ? { color: aside.listItemActive.color } : { color: aside.listItem.color}} /> : <SvgIcon className={classes.listItemIcon} style={ page.id === nav.current ? { color: aside.listItemActive.color } : { color: aside.listItem.color}} component={lifebuoyIcon} viewBox="0 0 600 600"/>}</ListItemIcon>
-                <ListItemText primary={page.name}/>
-              </ListItem>
-            ))}
-          </List>
+          {props.nav.pages.map((page) => (
+            <NavLink to={'/' + page.name.toLowerCase()} key={page.id} className={clsx(classes.listItem, isActive(page.name.toLowerCase()) ? classes.listItemActive : '')}>
+                {getNavIcon(page.name.toLowerCase())}
+                <Typography className={classes.listItemText} component="span">{page.name}</Typography>
+            </NavLink>
+          ))}
         </div>
       </Drawer>
     )
 }
 
-export default AsideNav;
+export default withRouter(AsideNav);

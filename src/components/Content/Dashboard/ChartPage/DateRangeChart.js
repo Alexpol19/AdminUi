@@ -3,10 +3,9 @@ import { DateRangePicker } from "materialui-daterange-picker";
 import { Box, FormControl, IconButton, InputLabel, makeStyles } from "@material-ui/core";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import clsx from 'clsx';
 import FilledInput from '@material-ui/core/FilledInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { months } from "../../../../common/months";
+import * as moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -18,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     right: 0
   },
   textField: {
-    // margin: theme.spacing(1),
     minWidth: 250,
     fontSize: '0.8rem'
   },
@@ -46,7 +44,7 @@ const DateRangeChart = props => {
     setDateRange(range);
     setDate({
         label: range.label ? range.label: 'Custom range',
-        date: startDate.getDate() + ' ' + months[startDate.getMonth()] + ' ' + startDate.getFullYear() + ' - ' + endDate.getDate() + ' ' + months[endDate.getMonth()] + ' ' + endDate.getFullYear()
+        date: moment(startDate).format('D MMM YYYY') + '-' + moment(endDate).format('D MMM YYYY')
     });
     props.getRaport({startDate, endDate})
   }

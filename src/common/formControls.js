@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import { greenTheme } from './ThemeVars';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';

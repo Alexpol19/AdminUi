@@ -31,14 +31,7 @@ const useStyles = makeStyles((theme) => ({
         }
     }
 }));
-  
-// function createData(fullName, idnp, tlf, panCard, lastTransaction) {
-//     return { fullName, idnp, tlf, panCard, lastTransaction };
-// }
 
-// const rows = [
-//     createData('John Smith', 201212345214, 37367522063, 2019382023233377, '14:45 12/12/20'),
-// ];
 const SearchResult = ({clients}) => {
     const classes = useStyles();
     const preventDefault = (event) => event.preventDefault();

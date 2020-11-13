@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import underscore from "underscore.string";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,17 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CardStatistic = ({installations, percent}) => {
     const classes = useStyles();
-    function numberFormat(num) {
-        if (typeof num !== "string") {
-          return numberFormat(num.toString())
-        } else {
-          if (num.length < 4) {
-            return num
-          } else {
-            return numberFormat(num.slice(0, num.length - 3)) + "," + num.slice(num.length - 3)
-          }
-        }
-      }
+    const installs = underscore.numberFormat(installations, 0, '.', ',')
     return (
         <Card className={classes.root} raised={true}>
             <CardContent>
@@ -37,7 +29,7 @@ const CardStatistic = ({installations, percent}) => {
                     Instalari pe dispozitive active
                 </Typography>
                 <Typography variant="h4" component="span">
-                    {numberFormat(installations)}
+                    {installs}
                 </Typography>
                 <Typography variant="body1" component="span" className={classes.percent}>
                     <Typography variant="body1" component="span">+{percent}%</Typography> vs previous 30days
